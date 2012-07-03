@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>stripe_event by integrallis</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>stripe_event</h1>
+        <p>Stripe webhook integration for Rails applications.</p>
+
+        <p class="view"><a href="https://github.com/integrallis/stripe_event">View the Project on GitHub <small>integrallis/stripe_event</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/integrallis/stripe_event/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/integrallis/stripe_event/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/integrallis/stripe_event">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>stripe_event</h2>
+
+<p>stripe_event is built on the ActiveSupport::Notifications API. Incoming webhook requests are authenticated by retrieving the event from Stripe. Authenticated events are published to subscribers.</p>
+
+<h2>Install</h2>
+
+<div class="highlight">
+<pre><span class="c1"># Gemfile</span>
+<span class="n">gem</span> <span class="s1">'stripe_event'</span>
+</pre>
+</div>
+
+
+<div class="highlight">
+<pre><span class="c1"># config/routes.rb</span>
+<span class="n">mount</span> <span class="no">StripeEvent</span><span class="o">::</span><span class="no">Engine</span> <span class="o">=&gt;</span> <span class="s2">"/stripe_event"</span> <span class="c1"># or provide a custom path</span>
+</pre>
+</div>
+
+
+<h2>Usage</h2>
+
+<div class="highlight">
+<pre><span class="c1"># config/initializers/stripe.rb</span>
+<span class="no">Stripe</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'STRIPE_API_KEY'</span><span class="o">]</span> <span class="c1"># Set your api key</span>
+
+<span class="c1"># Define subscriber behavior</span>
+<span class="no">StripeEvent</span><span class="o">.</span><span class="n">subscribe</span> <span class="s1">'charge.failed'</span> <span class="k">do</span> <span class="o">|</span><span class="n">event</span><span class="o">|</span>
+  <span class="no">MyClass</span><span class="o">.</span><span class="n">handle_failed_charge</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<h2>Register webhook url with Stripe</h2>
+
+<p><img src="https://raw.github.com/integrallis/stripe_event/master/screenshots/dashboard-webhook.png" alt="Setup webhook url" title="webhook setup"></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/integrallis">integrallis</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-30740843-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
